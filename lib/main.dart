@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,10 +14,6 @@ class FoodItem {
   String name;
   int quantity;
   FoodItem(this.name, this.quantity);
-
-  String toString() {
-    return 'FoodItem{name: $name, quantity: $quantity}';
-  }
 }
 
 class MyApp extends StatelessWidget {
@@ -46,6 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
   var quantityTotal = 0;
   var kcTotal = 0;
   List<FoodItem> donationList = [];
+  Flushbar errorBar = Flushbar(
+    backgroundColor: Colors.red,
+    message: "Invalid Input!",
+    duration: const Duration(seconds: 2),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +66,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListTile(
                     title: Text(
                       'Item: ${donationList[i].name}',
-                      style: const TextStyle(
-                          //style change
-                          fontSize: 26),
+                      style: const TextStyle(fontSize: 26),
                     ),
                     subtitle: Text(
                       'Quantity: ${donationList[i].quantity.toString()}',
-                      style: const TextStyle(
-                          //style change
-                          fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
                   ),
                 );
@@ -93,6 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+            child: Text('Knight Cash Earned: \$$kcTotal',
+                style:
+                    const TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+          )
         ],
       ),
     );
@@ -101,7 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void addDonationDialog(BuildContext context) {
     var quantityController = TextEditingController();
     var itemController = TextEditingController();
-    const errorBar = SnackBar(content: Text("Invalid Input"));
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -136,19 +139,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   {
                     setState(() {
                       quantityTotal += int.parse(quantityController.text);
-                      if (quantityTotal % 5 == 0) {
-                        kcTotal++;
+                      if (quantityTotal ~/ 5 > 0) {
+                        kcTotal += quantityTotal ~/ 5;
+                        quantityTotal = quantityTotal % 5;
                       }
-                      print('Quantity: $quantityTotal');
-                      print('KC: $kcTotal');
                     }),
                     donationList.add(FoodItem(itemController.text,
                         int.parse(quantityController.text))),
-                    for (var item in donationList) {print(item)},
                     Navigator.pop(context)
                   }
                 else
-                  {ScaffoldMessenger.of(context).showSnackBar(errorBar)}
+                  {errorBar.show(context)}
               },
               child: const Text("Submit"),
             ),
