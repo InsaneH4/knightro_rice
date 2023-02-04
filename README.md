@@ -15,3 +15,5 @@ Zeyu Jiang
 Seoyoung Kong
 
 Sam Hussain
+
+<a href="https://insaneh4.github.io/knightro_rice/">Try in your browser here</a>  

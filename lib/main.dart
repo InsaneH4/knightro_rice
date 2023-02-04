@@ -51,8 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      const Center (child: Image(image: image))
+    return Scaffold(      
       appBar: (AppBar(title: const Text('Knightro Rice'))),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
