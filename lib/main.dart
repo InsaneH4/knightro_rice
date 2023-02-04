@@ -52,9 +52,16 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               const Text('Donations'),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Add Donation"),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: 75,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 42),
+                  ),
+                  child: const Text("Add Donation"),
+                ),
               ),
             ],
           ),
