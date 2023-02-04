@@ -1,3 +1,4 @@
+<a href="https://insaneh4.github.io/knightro_rice/">Try in your browser here</a>  
 # knightro_rice
 This project was created for Hack-A-Day on February 4, 2023.
 
@@ -15,5 +16,3 @@ Zeyu Jiang
 Seoyoung Kong
 
 Sam Hussain
-
-<a href="https://insaneh4.github.io/knightro_rice/">Try in your browser here</a>  
