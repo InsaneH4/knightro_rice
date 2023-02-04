@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Knightro Rice',
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
+        primarySwatch: Colors.green,
       ),
       home: const MyHomePage(title: 'Knightro Rice'),
     );
@@ -110,21 +110,25 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Add Donation Item"),
-          content: Column(
-            children: <Widget>[
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: "Item Name",
-                ),
-                controller: itemController,
-              ),
-              TextField(
-                  keyboardType: TextInputType.number,
+          content: SizedBox(
+            width: 250,
+            height: 125,
+            child: Column(
+              children: <Widget>[
+                TextField(
                   decoration: const InputDecoration(
-                    labelText: "Quantity",
+                    labelText: "Item Name",
                   ),
-                  controller: quantityController),
-            ],
+                  controller: itemController,
+                ),
+                TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: "Quantity",
+                    ),
+                    controller: quantityController),
+              ],
+            ),
           ),
           actions: [
             TextButton(
