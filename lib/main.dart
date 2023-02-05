@@ -13,6 +13,7 @@ void main() {
 class FoodItem {
   String name;
   int quantity;
+
   FoodItem(this.name, this.quantity);
 }
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -51,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
+    return Scaffold(
       appBar: (AppBar(title: const Text('Knightro Rice'))),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -139,15 +141,17 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => {
                 if (itemController.text.isNotEmpty &&
                     quantityController.text.isNotEmpty &&
-                    RegExp(r'^-?[0-9]+$').hasMatch(quantityController.text))
+                    RegExp(r'^-?\d+$').hasMatch(quantityController.text))
                   {
-                    setState(() {
-                      quantityTotal += int.parse(quantityController.text);
-                      if (quantityTotal ~/ 5 > 0) {
-                        kcTotal += quantityTotal ~/ 5;
-                        quantityTotal = quantityTotal % 5;
-                      }
-                    }),
+                    setState(
+                      () {
+                        quantityTotal += int.parse(quantityController.text);
+                        if (quantityTotal ~/ 5 > 0) {
+                          kcTotal += quantityTotal ~/ 5;
+                          quantityTotal = quantityTotal % 5;
+                        }
+                      },
+                    ),
                     donationList.add(FoodItem(itemController.text,
                         int.parse(quantityController.text))),
                     Navigator.pop(context)
